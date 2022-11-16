@@ -143,6 +143,7 @@ allprojects {
   configurations.all {
     // zinc is the Scala incremental compiler, it has a configuration for its own dependencies
     // that are unrelated to the project dependencies, we should not change them
+    // Random comment
     if (name != "zinc") {
       resolutionStrategy {
         force(
