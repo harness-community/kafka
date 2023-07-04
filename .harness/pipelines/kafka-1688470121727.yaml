@@ -1,0 +1,33 @@
+pipeline:
+  identifier: Build_kafka_1688470134868
+  name: Build kafka
+  orgIdentifier: default
+  projectIdentifier: KafkaCI
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1687410205905
+        repoName: bkedar/kafka
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
