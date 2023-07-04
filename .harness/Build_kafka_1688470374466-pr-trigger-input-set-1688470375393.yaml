@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_kafka_1688470374466-pr-trigger-input-set
+  identifier: Build_kafka_1688470374466prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: KafkaCI
+  pipeline:
+    identifier: Build_kafka_1688470374466
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
