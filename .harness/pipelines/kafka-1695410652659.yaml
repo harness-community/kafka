@@ -1,0 +1,49 @@
+pipeline:
+  identifier: Build_kafka_1695410662718
+  name: Build kafka
+  orgIdentifier: default
+  projectIdentifier: kafka
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1695251573739
+        repoName: shilpanimbalkar1/kafka
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo I am thrilled to see this CI speed
+                  timeout: ""
+                  type: Run
+              - step:
+                  type: RunTests
+                  name: Run Tests with Intelligence
+                  identifier: Run_Tests_with_Intelligence
+                  spec:
+                    language: Java
+                    buildTool: Gradle
+                    args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
+                    packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
+                    runOnlySelectedTests: true
+                    preCommand: ls
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "**/*.xml"
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
