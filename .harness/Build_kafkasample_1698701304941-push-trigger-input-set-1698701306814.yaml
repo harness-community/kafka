@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_kafkasample_1698701304941-push-trigger-input-set
+  identifier: Build_kafkasample_1698701304941pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_kafkasample_1698701304941
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
