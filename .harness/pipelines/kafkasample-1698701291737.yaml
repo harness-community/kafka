@@ -24,6 +24,22 @@ pipeline:
                     command: echo hello world
                   timeout: ""
                   type: Run
+              - step:
+                  type: RunTests
+                  name: Run Tests with Intelligence
+                  identifier: Run_Tests_with_Intelligence
+                  spec:
+                    language: Java
+                    buildTool: Gradle
+                    args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
+                    packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
+                    runOnlySelectedTests: true
+                    preCommand: ls
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "**/*.xml"
           platform:
             arch: Amd64
             os: Linux
