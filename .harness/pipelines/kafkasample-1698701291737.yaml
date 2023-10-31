@@ -1,0 +1,49 @@
+pipeline:
+  identifier: Build_kafkasample_1698701304941
+  name: Build kafkasample
+  orgIdentifier: default
+  projectIdentifier: default_project
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1698701283582
+        repoName: kafkasample
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+              - step:
+                  type: RunTests
+                  name: Run Tests with Intelligence
+                  identifier: Run_Tests_with_Intelligence
+                  spec:
+                    language: Java
+                    buildTool: Gradle
+                    args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
+                    packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
+                    runOnlySelectedTests: true
+                    preCommand: ls
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "**/*.xml"
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
